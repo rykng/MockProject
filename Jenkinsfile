@@ -33,18 +33,23 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                echo "Deploying ${ currentBuild.changeSets }  to dev"
+                echo "Deploying ${ env.GIT_COMMIT }  to dev"
             }
         }
         stage('e2e Test') {
             steps {
                 echo "Going to run e2e Test vs ${ env.GIT_COMMIT } ${env.BUILD_NUMBER}"
-                build 'playwright-demo'
+                build 'mathhero'
             }
         }
         stage('GateKeeper') {
             steps {
                 echo 'GateKeeper to check if other services pass e2e test'
+                echo 'currentBuild.id? -> ${currentBuild.id}'
+                echo 'prev success? -> ${currentBuild.previousSuccessfulBuild}'
+                echo 'prev fail? -> ${currentBuild.previousFailedBuild}'
+                echo 'job URL -> ${env.JOB_URL}'
+                echo 'build URL -> ${env.BUILD_URL}'
             }
         }
         stage('Deploy to QA') {
