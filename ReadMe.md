@@ -8,8 +8,19 @@ it's for helping to test my private GateKeeper
 
 
 
+``` requirements
+pip install pytest
+# for making pytest running in parallell
+pip install pytest-xdist
 ```
+
+```
+# run unittest
 python -m unittest
+# run pytest
+pytest
+#run pytest in parallel
+pytest -n 2
 ```
 
 no need to setup any venv because the code uses all default package from python 3.10
